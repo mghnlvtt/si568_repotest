@@ -29,7 +29,7 @@ def main():
     st.subheader(multi)
     file_upload = st.file_uploader("Upload your file here: ", type="pdf")
     url_variable = st.query_params.get("url", "")
-    pasted_url = st.text_input("Or, paste the URL: ", value=initial_url)
+    pasted_url = st.text_input("Or, paste the URL: ", value=url_variable)
     st.query_params["url"] = pasted_url
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
     chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
