@@ -2,3 +2,6 @@ python-dotenv
 pydantic
 tiktoken
 langchain_openai
+bs4
+PyPDF2
+langchain_text_splitters
