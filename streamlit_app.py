@@ -41,7 +41,7 @@ def main():
     print(f"Successfully extracted {len(chunks)} chunks!")
     
     print("\n2. Processing chunks through the LangChain pipeline (gpt-4o-mini)...")
-    with st.spinner("Wait for it...", show_time=True):
+    with st.spinner("Reading your ToS document..."):
         result = analyze_tos(chunks)
         
         print("\n" + "="*50)
