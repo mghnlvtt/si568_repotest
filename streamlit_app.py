@@ -41,15 +41,18 @@ def main():
     print(f"Successfully extracted {len(chunks)} chunks!")
     
     print("\n2. Processing chunks through the LangChain pipeline (gpt-4o-mini)...")
-    result = analyze_tos(chunks)
-    
-    print("\n" + "="*50)
-    print("FINISHED ANALYSIS:")
-    print("="*50)
-    
-    # Pretty print the json output
-    print(json.dumps(result, indent=2))
+    with st.spinner("Wait for it...", show_time=True):
+        result = analyze_tos(chunks)
+        
+        print("\n" + "="*50)
+        print("FINISHED ANALYSIS:")
+        print("="*50)
+        
+        # Pretty print the json output
+        print(json.dumps(result, indent=2))
+    st.success("Done!")
     st.subheader(json.dumps(result, indent=2))
+    st.button("Rerun")
     
 if __name__ == "__main__":
     main()
