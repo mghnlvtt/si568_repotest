@@ -52,7 +52,7 @@ def main():
         print(json.dumps(result, indent=2))
     st.success("Done!")
     st.subheader("TOS Summary:")
-    st.subheader(result['service_introduction'])
+    st.subheader(result['summary']['service_introduction'])
     st.button("Rerun")
     
 if __name__ == "__main__":
