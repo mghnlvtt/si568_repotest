@@ -58,7 +58,7 @@ def main():
     '''
     st.markdown(testing)
     st.divider() 
-    # st.subheader(result['summary']['service_introduction'])
+    st.subheader(result['summary'])
     st.button("Rerun")
     
 if __name__ == "__main__":
