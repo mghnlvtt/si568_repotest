@@ -28,9 +28,11 @@ def main():
     '''
     st.subheader(multi)
     file_upload = st.file_uploader("Upload your file here: ", type="pdf")
-    file_paste = st.text_input("Or, paste the URL: ")
+    url_variable = st.query_params.get("url", "")
+    pasted_url = st.text_input("Or, paste the URL: ", value=initial_url)
+    st.query_params["url"] = pasted_url
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
-    chunks = extract_chunks(input_url=None, pdf=file_upload)
+    chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     
     if not chunks:
         print("Error: Could not extract chunks. Make sure the site allows scraping.")
