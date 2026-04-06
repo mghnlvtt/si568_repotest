@@ -95,7 +95,7 @@ def main():
     st.divider()
     st.markdown(terms)
     st.divider()
-    st.subheader(result)
+    st.warning(result['disclaimer'])
     st.button("Rerun")
     
 if __name__ == "__main__":
