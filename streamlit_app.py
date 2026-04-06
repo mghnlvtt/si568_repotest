@@ -54,10 +54,8 @@ def main():
     service_introduction = result['summary']['service_introduction']
     st.subheader("ToS Summary:")
     st.divider() 
-    testing = '''# ToS Summary:  
-## Description:
-
-f'{service_introduction}
+    testing = f'''### Description:  
+    {service_introduction}
     '''
     st.markdown(testing)
     # st.subheader(result['summary']['service_introduction'])
