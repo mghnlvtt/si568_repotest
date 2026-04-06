@@ -51,7 +51,8 @@ def main():
         # Pretty print the json output
         print(json.dumps(result, indent=2))
     st.success("Done!")
-    st.subheader(result)
+    st.subheader("TOS Summary:")
+    st.subheader(result['service_introduction'])
     st.button("Rerun")
     
 if __name__ == "__main__":
