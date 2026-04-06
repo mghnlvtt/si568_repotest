@@ -53,11 +53,11 @@ def main():
     st.success("Done!")
     service_introduction = result['summary']['service_introduction']
     st.subheader("ToS Summary:")
-    st.divider() 
-    testing = f'''### Description:  
-    {service_introduction}
+    testing = f'''#### Description:\
+    \n{service_introduction}
     '''
     st.markdown(testing)
+    st.divider() 
     # st.subheader(result['summary']['service_introduction'])
     st.button("Rerun")
     
