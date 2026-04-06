@@ -51,7 +51,7 @@ def main():
         # Pretty print the json output
         print(json.dumps(result, indent=2))
     st.success("Done!")
-    st.subheader(json.dumps(result, indent=2))
+    st.subheader(result)
     st.button("Rerun")
     
 if __name__ == "__main__":
