@@ -22,11 +22,11 @@ def main():
         anchor=False,
         divider="blue"
     )
-    multi = '''Every day, we're presented with ToS documents that we have to agree to in order to use a service.
-
-    The language in these documents are confusing and difficult to understand. Instead of blindly hitting 'accept', use this tool to understand what exactly you're agreeing to.
+    multi = '''Every day, we're presented with ToS documents that we have to agree to in order to use a service. \
+    The language in these documents are confusing and difficult to understand. \
+    Instead of blindly hitting 'accept', use this tool to understand what exactly you're agreeing to.
     '''
-    st.markdown(multi)
+    st.subheader(multi)
     file_upload = st.file_uploader("Upload your file here: ", type="pdf")
     file_paste = st.text_input("Or, paste the URL: ")
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
@@ -47,6 +47,7 @@ def main():
     
     # Pretty print the json output
     print(json.dumps(result, indent=2))
-
+    st.subheader(json.dumps(result, indent=2))
+    
 if __name__ == "__main__":
     main()
