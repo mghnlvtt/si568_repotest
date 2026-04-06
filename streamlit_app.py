@@ -63,22 +63,22 @@ def main():
     intro = f'''#### Description:\
     \n{service_introduction}
     '''
-    rights = f'''#### What rights do you have?:\
+    rights = f'''#### What rights do you have?\
     \n{user_rights}
     '''
-    privacy = f'''#### What about your data and privacy?:\
+    privacy = f'''#### What about your data and privacy?\
     \n{data_privacy}
     '''
-    refund = f'''#### What about payment and refunds?:\
+    refund = f'''#### What about payment and refunds?\
     \n{payment_refund}
     '''
-    limitations = f'''#### What about liability?:\
+    limitations = f'''#### What about liability?\
     \n{liability}
     '''
-    resolution = f'''#### What about dispute resolution?:\
+    resolution = f'''#### What about dispute resolution?\
     \n{dispute_resolution}
     '''
-    terms = f'''#### Is there anything else I should know about?:\
+    terms = f'''#### Is there anything else I should know about?\
     \n{other_terms}
     '''
     st.markdown(intro)
