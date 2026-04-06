@@ -95,7 +95,7 @@ def main():
     st.divider()
     st.markdown(terms)
     st.divider()
-    st.subheader(results)
+    st.subheader(result)
     st.button("Rerun")
     
 if __name__ == "__main__":
