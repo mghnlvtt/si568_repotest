@@ -23,8 +23,8 @@ def main():
         divider="blue"
     )
     multi = '''Every day, we're presented with ToS documents that we have to agree to in order to use a service. \
-    The language in these documents are confusing and difficult to understand. \
-    Instead of blindly hitting 'accept', use this tool to understand what exactly you're agreeing to.
+    \nThe language in these documents are confusing and difficult to understand. \
+    \nInstead of blindly hitting 'accept', use this tool to understand what exactly you're agreeing to.
     '''
     st.subheader(multi)
     file_upload = st.file_uploader("Upload your file here: ", type="pdf")
