@@ -50,54 +50,57 @@ def main():
         
         # Pretty print the json output
         print(json.dumps(result, indent=2))
-    st.success("Done!")
-    st.subheader(result)
-    service_introduction = result['summary']['service_introduction']
-    user_rights = result['summary']['user_rights']
-    data_privacy = result['summary']['data_and_privacy']
-    payment_refund = result['summary']['payment_and_refund']
-    liability = result['summary']['limitation_of_liability']
-    dispute_resolution = result['summary']['dispute_resolution']
-    other_terms = result['summary']['other_important_terms']
-    
-    st.subheader("ToS Summary:")
-    intro = f'''#### Description:\
-    \n{service_introduction}
-    '''
-    rights = f'''#### What rights do you have?\
-    \n{user_rights}
-    '''
-    privacy = f'''#### What about your data and privacy?\
-    \n{data_privacy}
-    '''
-    refund = f'''#### What about payment and refunds?\
-    \n{payment_refund}
-    '''
-    limitations = f'''#### What about liability?\
-    \n{liability}
-    '''
-    resolution = f'''#### What about dispute resolution?\
-    \n{dispute_resolution}
-    '''
-    terms = f'''#### Is there anything else I should know about?\
-    \n{other_terms}
-    '''
-    st.markdown(intro)
-    st.divider()
-    st.markdown(rights)
-    st.divider()
-    st.markdown(privacy)
-    st.divider()
-    st.markdown(refund)
-    st.divider()
-    st.markdown(limitations)
-    st.divider()
-    st.markdown(resolution)
-    st.divider()
-    st.markdown(terms)
-    st.divider()
-    st.warning(result['disclaimer'])
-    st.button("Rerun")
+    try:
+        service_introduction = result['summary']['service_introduction']
+        st.success("Done!")
+        user_rights = result['summary']['user_rights']
+        data_privacy = result['summary']['data_and_privacy']
+        payment_refund = result['summary']['payment_and_refund']
+        liability = result['summary']['limitation_of_liability']
+        dispute_resolution = result['summary']['dispute_resolution']
+        other_terms = result['summary']['other_important_terms']
+        
+        st.subheader("ToS Summary:")
+        intro = f'''#### Description:\
+        \n{service_introduction}
+        '''
+        rights = f'''#### What rights do you have?\
+        \n{user_rights}
+        '''
+        privacy = f'''#### What about your data and privacy?\
+        \n{data_privacy}
+        '''
+        refund = f'''#### What about payment and refunds?\
+        \n{payment_refund}
+        '''
+        limitations = f'''#### What about liability?\
+        \n{liability}
+        '''
+        resolution = f'''#### What about dispute resolution?\
+        \n{dispute_resolution}
+        '''
+        terms = f'''#### Is there anything else I should know about?\
+        \n{other_terms}
+        '''
+        st.markdown(intro)
+        st.divider()
+        st.markdown(rights)
+        st.divider()
+        st.markdown(privacy)
+        st.divider()
+        st.markdown(refund)
+        st.divider()
+        st.markdown(limitations)
+        st.divider()
+        st.markdown(resolution)
+        st.divider()
+        st.markdown(terms)
+        st.divider()
+        st.warning(result['disclaimer'])
+        st.button("Rerun")
+    except:
+        st.warning("Attempt failed - review error message below.")
+        st.markdown(result)
     
 if __name__ == "__main__":
     main()
