@@ -51,7 +51,7 @@ def main():
         # Pretty print the json output
         print(json.dumps(result, indent=2))
     st.success("Done!")
-    st.subheader(results)
+    st.subheader(result)
     service_introduction = result['summary']['service_introduction']
     user_rights = result['summary']['user_rights']
     data_privacy = result['summary']['data_and_privacy']
