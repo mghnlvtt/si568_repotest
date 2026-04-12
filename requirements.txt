@@ -1,9 +1,11 @@
-python-dotenv
+ast
+beautifulsoup4==4.13.3
+bs4
+langchain_openai
+langchain_text_splitters
 pydantic==2.12.5
 pydantic_core==2.41.5
-tiktoken
-langchain_openai
-bs4
-beautifulsoup4==4.13.3
 PyPDF2==3.0.1
-langchain_text_splitters
+python-dotenv
+re
+tiktoken
