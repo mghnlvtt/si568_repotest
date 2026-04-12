@@ -101,10 +101,10 @@ def main():
         st.warning(result['disclaimer'])
         st.button("Rerun")
     except:
-        error_code = re.search("Error code: \\d{3,}", result['error'])
+        match = re.search("Error code: \\d{3,}", result['error'])
         if match: 
             st.warning("Attempt failed - review error message below.")
-            error_code = error_code.group()
+            error_code = match.group()
             result_dict = ast.literal_eval(result['error'].split(" - ")[1])
             error_name = result_dict['error']['code']
             error_message = result_dict['error']['message']
