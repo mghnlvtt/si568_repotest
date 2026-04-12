@@ -104,8 +104,8 @@ def main():
         st.warning("Attempt failed - review error message below.")
         error_code = re.search("Error code: \\d{3,}", result['error']).group()
         result_dict = ast.literal_eval(result['error'].split(" - ")[1])
-        error_name = res['error']['code']
-        error_message = res['error']['message']
+        error_name = result_dict['error']['code']
+        error_message = result_dict['error']['message']
         error_message_formatted = f"{error_code}. Error details: {error_name}, {error_message}"
         st.code(error_message_formatted)
 
