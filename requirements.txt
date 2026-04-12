@@ -1,4 +1,3 @@
-ast
 beautifulsoup4==4.13.3
 bs4
 langchain_openai
