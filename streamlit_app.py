@@ -34,8 +34,9 @@ def main():
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
     chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     
-    if not chunks:
+    if (pasted_url is None or file_upload is None) and not chunks:
         print("Error: Could not extract chunks. Make sure the site allows scraping.")
+        st.warning('Error: Could not extract chunks. Make sure the site allows scraping.')
         return
         
     print(f"Successfully extracted {len(chunks)} chunks!")
