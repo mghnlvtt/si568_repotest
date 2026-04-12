@@ -1,6 +1,8 @@
 import json
 import importlib.util
 import streamlit as st
+import ast
+import re
 
 from langchain_pipeline import analyze_tos
 
@@ -34,8 +36,7 @@ def main():
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
     chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     
-    if (pasted_url is None or file_upload is None) and not chunks:
-        print("Error: Could not extract chunks. Make sure the site allows scraping.")
+    if not chunks:
         st.warning('Error: Could not extract chunks. Make sure the site allows scraping.')
         return
         
@@ -101,7 +102,13 @@ def main():
         st.button("Rerun")
     except:
         st.warning("Attempt failed - review error message below.")
-        st.markdown(result)
+        error_code = re.search("Error code: \\d{3,}", result['error']).group()
+        result_dict = ast.literal_eval(result['error'].split(" - ")[1])
+        error_name = res['error']['code']
+        error_message = res['error']['message']
+        error_message_formatted = f"{error_code}. Error details: {error_name}, {error_message}"
+        st.code(error_message_formatted)
+
     
 if __name__ == "__main__":
     main()
