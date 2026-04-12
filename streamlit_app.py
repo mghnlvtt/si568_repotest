@@ -111,7 +111,7 @@ def main():
             error_message_formatted = f"{error_code}. Error details: {error_name}, {error_message}"
             st.code(error_message_formatted)
         else:
-            st.warning(results)
+            st.warning(result)
 
     
 if __name__ == "__main__":
