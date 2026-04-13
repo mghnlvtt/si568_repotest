@@ -29,24 +29,22 @@ def main():
     \nInstead of blindly hitting 'accept', use this tool to understand what exactly you're agreeing to.
     '''
     st.subheader(multi)
-    if "chunks" not in st.session_state:
-        st.session_state["chunks"] = None
     file_upload = st.file_uploader("Upload your file here: ", type="pdf")
     url_variable = st.query_params.get("url", "")
     pasted_url = st.text_input("Or, paste the URL: ", value=url_variable)
     st.query_params["url"] = pasted_url
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
-    st.session_state.chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
+    chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     
-    if st.session_state.chunks is not None:
-        if len(st.session_state.chunks) == 0:
-            st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
-            return
+    if len(chunks)==0:
+        st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
+        print('Error: Could not extract chunks. Make sure the site allows scraping.')
+        return
     # if not chunks:
     #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     return
-    st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks!")
+    st.subheader(f"Successfully extracted {len(chunks)} chunks!")
     print(f"Successfully extracted {len(chunks)} chunks!")
     
     # print("\n2. Processing chunks through the LangChain pipeline (gpt-4o-mini)...")
