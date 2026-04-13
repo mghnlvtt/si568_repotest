@@ -33,13 +33,15 @@ def main():
     url_variable = st.query_params.get("url", "")
     pasted_url = st.text_input("Or, paste the URL: ", value=url_variable)
     st.query_params["url"] = pasted_url
+    if file_upload or len(st.query_params["url"]) >1:
+        st.subheader('Checked')
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
-    chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
+    # chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     
-    if len(chunks)==0:
-        st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
-        print('Error: Could not extract chunks. Make sure the site allows scraping.')
-        return
+    # if len(chunks)==0:
+    #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
+    #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
+    #     return
     # if not chunks:
     #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
