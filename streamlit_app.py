@@ -31,116 +31,83 @@ def main():
     st.subheader(multi)
     file_upload = st.file_uploader("Upload your file here: ", type="pdf")
     url_variable = st.query_params.get("url", "")
-    chunks = None
     pasted_url = st.text_input("Or, paste the URL: ", value=url_variable)
     st.query_params["url"] = pasted_url
-    # if file_upload or len(st.query_params["url"]) >1:
-    #     st.session_state['chunks'] = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
-    #     st.subheader('Checked')
-    #     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
-  
-    # st.session_state.chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
-    # print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
+    print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
     chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
 
-    if not chunks:
-        st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
-        print('Error: Could not extract chunks. Make sure the site allows scraping.')
-        return
-
-    # type_testing = type(st.session_state.chunks)
-    # st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
-
-    # if st.session_state['chunks'] is not None:
-    #     chunks = st.session_state['chunks']
+    print(f"Successfully extracted {len(chunks)} chunks!")
     
-    # if len(chunks) == 0:
-    #     st.error("Error: The returned list is empty.")
-    # else:
-    #     st.success(f"Data received: {chunks}, type is: {type_testing}")
-    
-    # if len(st.session_state.chunks)==0:
-    #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
-    #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
-    #     return
-    # else: 
-    #     st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
-    #     continue
-  
-
-    # st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks!")
-    # print(f"Successfully extracted {len(chunks)} chunks!")
-    
-    # print("\n2. Processing chunks through the LangChain pipeline (gpt-4o-mini)...")
-    # with st.spinner("Reading your ToS document..."):
-    #     result = analyze_tos(chunks)
+    print("\n2. Processing chunks through the LangChain pipeline (gpt-4o-mini)...")
+    with st.spinner("Reading your ToS document..."):
+        result = analyze_tos(chunks)
         
-    #     print("\n" + "="*50)
-    #     print("FINISHED ANALYSIS:")
-    #     print("="*50)
+        print("\n" + "="*50)
+        print("FINISHED ANALYSIS:")
+        print("="*50)
         
-    #     # Pretty print the json output
-    #     print(json.dumps(result, indent=2))
-    # try:
-    #     service_introduction = result['summary']['service_introduction']
-    #     st.success("Done!")
-    #     user_rights = result['summary']['user_rights']
-    #     data_privacy = result['summary']['data_and_privacy']
-    #     payment_refund = result['summary']['payment_and_refund']
-    #     liability = result['summary']['limitation_of_liability']
-    #     dispute_resolution = result['summary']['dispute_resolution']
-    #     other_terms = result['summary']['other_important_terms']
+        # Pretty print the json output
+        print(json.dumps(result, indent=2))
+    try:
+        service_introduction = result['summary']['service_introduction']
+        st.success("Done!")
+        user_rights = result['summary']['user_rights']
+        data_privacy = result['summary']['data_and_privacy']
+        payment_refund = result['summary']['payment_and_refund']
+        liability = result['summary']['limitation_of_liability']
+        dispute_resolution = result['summary']['dispute_resolution']
+        other_terms = result['summary']['other_important_terms']
         
-    #     st.subheader("ToS Summary:")
-    #     intro = f'''#### Description:\
-    #     \n{service_introduction}
-    #     '''
-    #     rights = f'''#### What rights do you have?\
-    #     \n{user_rights}
-    #     '''
-    #     privacy = f'''#### What about your data and privacy?\
-    #     \n{data_privacy}
-    #     '''
-    #     refund = f'''#### What about payment and refunds?\
-    #     \n{payment_refund}
-    #     '''
-    #     limitations = f'''#### What about liability?\
-    #     \n{liability}
-    #     '''
-    #     resolution = f'''#### What about dispute resolution?\
-    #     \n{dispute_resolution}
-    #     '''
-    #     terms = f'''#### Is there anything else I should know about?\
-    #     \n{other_terms}
-    #     '''
-    #     st.markdown(intro)
-    #     st.divider()
-    #     st.markdown(rights)
-    #     st.divider()
-    #     st.markdown(privacy)
-    #     st.divider()
-    #     st.markdown(refund)
-    #     st.divider()
-    #     st.markdown(limitations)
-    #     st.divider()
-    #     st.markdown(resolution)
-    #     st.divider()
-    #     st.markdown(terms)
-    #     st.divider()
-    #     st.warning(result['disclaimer'])
-    #     st.button("Rerun")
-    # except:
-    #     match = re.search("Error code: \\d{3,}", result['error'])
-    #     if match: 
-    #         st.error("Attempt failed - review error message below.")
-    #         error_code = match.group()
-    #         result_dict = ast.literal_eval(result['error'].split(" - ")[1])
-    #         error_name = result_dict['error']['code']
-    #         error_message = result_dict['error']['message']
-    #         error_message_formatted = f"{error_code}. Error details: {error_name}, {error_message}"
-    #         st.code(error_message_formatted)
-    #     else:
-    #         st.error(result)
+        st.subheader("ToS Summary:")
+        intro = f'''#### Description:\
+        \n{service_introduction}
+        '''
+        rights = f'''#### What rights do you have?\
+        \n{user_rights}
+        '''
+        privacy = f'''#### What about your data and privacy?\
+        \n{data_privacy}
+        '''
+        refund = f'''#### What about payment and refunds?\
+        \n{payment_refund}
+        '''
+        limitations = f'''#### What about liability?\
+        \n{liability}
+        '''
+        resolution = f'''#### What about dispute resolution?\
+        \n{dispute_resolution}
+        '''
+        terms = f'''#### Is there anything else I should know about?\
+        \n{other_terms}
+        '''
+        st.markdown(intro)
+        st.divider()
+        st.markdown(rights)
+        st.divider()
+        st.markdown(privacy)
+        st.divider()
+        st.markdown(refund)
+        st.divider()
+        st.markdown(limitations)
+        st.divider()
+        st.markdown(resolution)
+        st.divider()
+        st.markdown(terms)
+        st.divider()
+        st.warning(result['disclaimer'])
+        st.button("Rerun")
+    except:
+        match = re.search("Error code: \\d{3,}", result['error'])
+        if match: 
+            st.error("Attempt failed - review error message below.")
+            error_code = match.group()
+            result_dict = ast.literal_eval(result['error'].split(" - ")[1])
+            error_name = result_dict['error']['code']
+            error_message = result_dict['error']['message']
+            error_message_formatted = f"{error_code}. Error details: {error_name}, {error_message}"
+            st.code(error_message_formatted)
+        else:
+            st.error(result)
 
     
 if __name__ == "__main__":
