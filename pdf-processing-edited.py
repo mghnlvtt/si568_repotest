@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from PyPDF2 import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import streamlit as st
 
 def extract_chunks(input_url, pdf=None):
     """
@@ -34,6 +35,7 @@ def extract_chunks(input_url, pdf=None):
             url_text = '\n'.join(p.get_text() for p in paragraphs if p.get_text().strip())
         except Exception as e:
             print(f"URL Extract Error: {e}")
+            st.error("URL failed! Make sure your site allows scraping.")
             pass
 
     current_text = ""
