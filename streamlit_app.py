@@ -42,11 +42,14 @@ def main():
     # print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
     # chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     type_testing = type(st.session_state.chunks)
-    st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
-    # if len(st.session_state.chunks)==0:
-    #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
-    #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
-    #     return
+    # st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
+    if len(st.session_state.chunks)==0:
+        st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
+        print('Error: Could not extract chunks. Make sure the site allows scraping.')
+        return
+    else: 
+        st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
+        continue
     # if not chunks:
     #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
