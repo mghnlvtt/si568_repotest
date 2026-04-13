@@ -38,11 +38,15 @@ def main():
     print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
     st.session_state.chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     
-    if not chunks:
-        st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
-        print('Error: Could not extract chunks. Make sure the site allows scraping.')
-        return
-    st.subheader(f"Successfully extracted {len(chunks)} chunks!")
+    if st.session_state.chunks is not None:
+        if len(st.session_state.chunks) == 0:
+            st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
+            return
+    # if not chunks:
+    #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
+    #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
+    #     return
+    st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks!")
     print(f"Successfully extracted {len(chunks)} chunks!")
     
     # print("\n2. Processing chunks through the LangChain pipeline (gpt-4o-mini)...")
