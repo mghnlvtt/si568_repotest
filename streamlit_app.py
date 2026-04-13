@@ -46,8 +46,8 @@ def main():
     #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     return
-    st.subheader(f"Successfully extracted {len(chunks)} chunks!")
-    print(f"Successfully extracted {len(chunks)} chunks!")
+    # st.subheader(f"Successfully extracted {len(chunks)} chunks!")
+    # print(f"Successfully extracted {len(chunks)} chunks!")
     
     # print("\n2. Processing chunks through the LangChain pipeline (gpt-4o-mini)...")
     # with st.spinner("Reading your ToS document..."):
