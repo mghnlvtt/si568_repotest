@@ -31,26 +31,40 @@ def main():
     st.subheader(multi)
     file_upload = st.file_uploader("Upload your file here: ", type="pdf")
     url_variable = st.query_params.get("url", "")
-    if "chunks" not in st.session_state:
-        st.session_state.chunks = None
+    if 'chunks' not in st.session_state:
+        st.session_state['chunks'] = None
     pasted_url = st.text_input("Or, paste the URL: ", value=url_variable)
     st.query_params["url"] = pasted_url
     if file_upload or len(st.query_params["url"]) >1:
+        st.session_state['chunks'] = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
         st.subheader('Checked')
         print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
-        st.session_state.chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
+  
+    # st.session_state.chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     # print(f"1. Reading PDF ({file_upload}) and extracting chunks...")
     # chunks = extract_chunks(input_url=st.query_params["url"], pdf=file_upload)
     type_testing = type(st.session_state.chunks)
     # st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
-    if len(st.session_state.chunks)==0:
-        st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
-        print('Error: Could not extract chunks. Make sure the site allows scraping.')
-        return
-    else: 
-        st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
-        continue
-    # if not chunks:
+
+    if st.session_state['chunks'] is not None:
+        chunks = st.session_state['chunks']
+    
+    if len(chunks) == 0:
+        st.error("Error: The returned list is empty.")
+    else:
+        st.success(f"Data received: {chunks}, type is: {type_testing}")
+    
+    # if len(st.session_state.chunks)==0:
+    #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
+    #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
+    #     return
+    # else: 
+    #     st.subheader(f"Successfully extracted {len(st.session_state.chunks)} chunks! Chunks is {type_testing}")
+    #     continue
+  
+
+
+# if not chunks:
     #     st.error('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     print('Error: Could not extract chunks. Make sure the site allows scraping.')
     #     return
