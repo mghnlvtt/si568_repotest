@@ -51,7 +51,7 @@ def extract_chunks(input_url, pdf=None):
         current_text = url_text
         # store_name = input_url.replace("https://", "").replace("http://", "").replace("/", "_")
     else:
-        # TODO: display a message on interface to ask user to upload valid PDF/URL
+        st.error("Please upload a valid PDF/URL.")
         return []
 
     # Split text into chunks specifically for langchain
